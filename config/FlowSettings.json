@@ -1,0 +1,37 @@
+{
+  "Element1": {
+    "id": 1,
+    "name": "Clock",
+    "object": "ClockElement",
+    "product": "None",
+    "next": "Element2"
+  },
+  "Element2": {
+    "id": 2,
+    "name": "Step1",
+    "object": "QueueElement",
+    "product": "DummyProduct",
+    "next": "Element3"
+  },
+  "Element3": {
+    "id": 3,
+    "name": "Step2",
+    "object": "QueueElement",
+    "product": "DummyProduct",
+    "next": "Element4"
+  },
+  "Element4": {
+    "id": 4,
+    "name": "Step3",
+    "object": "QueueElement",
+    "product": "DummyProduct",
+    "next": "Element5"
+  },
+  "Element5": {
+    "id": 5,
+    "name": "Terminate",
+    "object": "TerminateElement",
+    "product": "None",
+    "next": "None"
+  }
+}
