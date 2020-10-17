@@ -12,7 +12,7 @@ class ProductManager(IProductManager):
         for name, value in self._elements.items():
             print("init:" + name)
             if name == "clock":
-                value.init(self.config.ClockGenerator.interval)
+                value.init(self.config.WatchDog.Interval)
             else:
                 value.init()
         

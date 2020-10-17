@@ -1,38 +1,43 @@
 import configparser
-
+import json
 
 class SystemConfig(object):
     def __init__(self, parser):
         self.parser = parser
 
     def read(self):
-        self._os = self.parser.get("System", "os")
-        self._version = self.parser.get("System", "version")
-        self._path = self.parser.get("System", "path")
+        self._Version = self.parser.get("System", "Version")
+        self._Path = self.parser.get("System", "Path")
+        self._FlowDefine= self.parser.get("System", "FlowDefine")
 
     @property
-    def os(self):
-        return self._os
+    def Version(self):
+        return self._Version
 
     @property
-    def version(self):
-        return self._version
+    def Path(self):
+        return self._Path
 
     @property
-    def path(self):
-        return self._path
+    def FlowDefine(self):
+        return self._FlowDefine
 
 
-class ClockGeneratorConfig(object):
+class WatchDogConfig(object):
     def __init__(self, parser):
         self.parser = parser
 
     def read(self):
-        self._interval = self.parser.get("ClockGenerator", "interval")
+        self._Interval = self.parser.get("WatchDog", "Interval")
+        self._OverShoot = self.parser.get("WatchDog", "OverShoot")
 
     @property
-    def interval(self):
-        return float(self._interval)
+    def Interval(self):
+        return float(self._Interval)
+    
+    @property
+    def OverShoot(self):
+        return int(self._OverShoot)
 
 
 class Config(object):
@@ -43,7 +48,7 @@ class Config(object):
         self.parser = configparser.ConfigParser()
 
         self._System = SystemConfig(self.parser)
-        self._ClockGenerator = ClockGeneratorConfig(self.parser)
+        self._WatchDog = WatchDogConfig(self.parser)
 
     @classmethod
     def getConfig(cls):
@@ -55,12 +60,12 @@ class Config(object):
         self.parser.read(self.config_file, "utf-8")
 
         self._System.read()
-        self._ClockGenerator.read()
+        self._WatchDog.read()
 
     @property
     def System(self):
         return self._System
 
     @property
-    def ClockGenerator(self):
-        return self._ClockGenerator
+    def WatchDog(self):
+        return self._WatchDog

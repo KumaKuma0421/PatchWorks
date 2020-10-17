@@ -63,7 +63,7 @@ def main():
     product4.start()
 
     logger.info("Init Elements")
-    queue0.init(config.ClockGenerator.interval)
+    queue0.init(config.WatchDog.Interval)
     queue1.init()
     queue2.init()
     queue3.init()
