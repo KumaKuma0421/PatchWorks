@@ -13,3 +13,8 @@ print("config.System.Version=" + config.System.Version)
 print("config.System.Path=" + config.System.Path)
 print("config.WatchDog.Interval={0}".format(config.WatchDog.Interval))
 print("config.WatchDog.OverShoot={0}".format(config.WatchDog.OverShoot))
+
+flow_def = config.FlowDefine.Flow
+print(flow_def)
+print(flow_def["Element3"])
+print(flow_def["Element3"]["object"])

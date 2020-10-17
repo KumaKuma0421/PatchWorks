@@ -39,6 +39,20 @@ class WatchDogConfig(object):
     def OverShoot(self):
         return int(self._OverShoot)
 
+class FlowDefineConfig(object):
+    def __init__(self, parser):
+        self.parser = parser
+        self._hierarchy = dict()
+    
+    def read(self):
+        self._FlowDefine= self.parser.get("System", "FlowDefine")
+        with open(self._FlowDefine) as f:
+            self._hierarchy = json.load(f)
+    
+    @property
+    def Flow(self):
+        return self._hierarchy
+        
 
 class Config(object):
     _instance = None
@@ -49,6 +63,7 @@ class Config(object):
 
         self._System = SystemConfig(self.parser)
         self._WatchDog = WatchDogConfig(self.parser)
+        self._FlowDefine = FlowDefineConfig(self.parser)
 
     @classmethod
     def getConfig(cls):
@@ -61,6 +76,7 @@ class Config(object):
 
         self._System.read()
         self._WatchDog.read()
+        self._FlowDefine.read()
 
     @property
     def System(self):
@@ -69,3 +85,7 @@ class Config(object):
     @property
     def WatchDog(self):
         return self._WatchDog
+
+    @property
+    def FlowDefine(self):
+        return self._FlowDefine
