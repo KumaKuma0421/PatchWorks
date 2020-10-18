@@ -1,0 +1,15 @@
+{
+  "Key1": "Value1",
+  "Key2": "Value2",
+  "NewValues": {
+    "NewKey1": "NewValue1",
+    "NewKey2": "NewValue2",
+    "NewArrayValue": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  }
+}

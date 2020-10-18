@@ -37,6 +37,7 @@ while True:
     
     # ウィンドウに画像を表示 --- (*3)
     cv2.imshow('PUSH ENTER KEY', img)
+    cv2.moveWindow('PUSH ENTER KEY', 30, 30)
     counter += 1
 
     # Enterキーが押されたら終了する
