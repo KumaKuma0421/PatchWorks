@@ -1,7 +1,7 @@
 {
   "Element1": {
-    "id": 1,
-    "name": "Clock",
+    "id": "Clock",
+    "name": "Clock Generator",
     "object": "ClockElement",
     "product": "None",
     "next": "Element2"

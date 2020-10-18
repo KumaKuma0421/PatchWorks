@@ -15,12 +15,12 @@ if __name__ == "__main__":
     config.read()
     logger = Logger.getLogger()
     
-    factory = FactoryMethod()
+    factory = FactoryMethod(config, logger)
     manager = factory.create()
-    manager.init(config, logger)
-    for i in range(5):
-        manager.start()
-        time.sleep(5)
-        manager.stop()
-        time.sleep(5)
-    manager.exit()
+    # manager.init(config, logger)
+    # for i in range(5):
+    #     manager.start()
+    #     time.sleep(5)
+    #     manager.stop()
+    #     time.sleep(5)
+    # manager.exit()

@@ -8,61 +8,62 @@ from modules.ProductManager import ProductManager
 from modules.DummyProduct import DummyProduct
 
 
+class Creator(object):
+    def __init__(self, values):
+        self._values = values
+    
+    def create_element(self):
+        if self._values["object"] == "ClockElement":
+            return ClockElement(self._values["id"])
+        elif self._values["object"] == "QueueElement":
+            return QueueElement(self._values["id"])
+        elif self._values["object"] == "TerminateElement":
+            return TerminateElement(self._values["id"])
+        else:
+            return None
+
+    def create_product(self):
+        if self._values["product"] == "DummyProduct":
+            return DummyProduct(self._values["id"])
+        else:
+            return None
+    
+    def create(self):
+        element = self.create_element()
+        product = self.create_product()
+        element.set_product(product)
+
+        return element, product
+
 class FactoryMethod(object):
-    def __init__(self):
-        pass
+    def __init__(self, config, logger):
+        self._config = config
+        self._logger = logger
 
     def create(self):
         manager = ProductManager()
 
-        # --------------------
-        clock = ClockElement("clock")
-        manager.set_element("clock", clock)
+        for key, values in self._config.FlowDefine.Flow.items():
+            self._logger.info(
+                "flow[{0}] id={1} name={2} object={3} product={4} nect={5}"
+                .format(
+                    key,
+                    values["id"], values["name"], values["object"],
+                    values["product"], values["next"]
+                )
+            )
+            # --------------------
+            element, product = Creator(values).create()
+            manager.set_element(values["name"], element)
+            manager.set_product(values["name"], product)
+            # --------------------
+    
 
-        # --------------------
-        queue0 = QueueElement("queue0")
-        manager.set_element("queue0", queue0)
-
-        product0 = DummyProduct("product0")
-        manager.set_product("product0", product0)
-
-        queue0.product = product0
-
-        # --------------------
-        queue1 = QueueElement("queue1")
-        manager.set_element("queue1", queue1)
-
-        product1 = DummyProduct("product1")
-        manager.set_product("product1", product1)
-
-        queue1.product = product1
-
-        # --------------------
-        queue2 = QueueElement("queue2")
-        manager.set_element("queue2", queue2)
-
-        product2 = DummyProduct("product2")
-        manager.set_product("product2", product2)
-
-        queue2.product = product2
-
-        # --------------------
-        queue3 = QueueElement("queue3")
-        manager.set_element("queue3", queue3)
-
-        product3 = DummyProduct("product3")
-        manager.set_product("product3", product3)
-
-        queue3.product = product3
-
-        # --------------------
-        terminate = TerminateElement("terminate")
-        manager.set_element("terminate", terminate)
 
         clock.attach(queue0)
         queue0.attach(queue1)
         queue1.attach(queue2)
         queue2.attach(queue3)
         queue3.attach(terminate)
-        
+
         return manager
