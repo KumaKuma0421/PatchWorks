@@ -31,7 +31,8 @@ class Creator(object):
     def create(self):
         element = self.create_element()
         product = self.create_product()
-        element.set_product(product)
+        if product is not None:
+            element.product(product)
 
         return element, product
 
@@ -54,16 +55,13 @@ class FactoryMethod(object):
             )
             # --------------------
             element, product = Creator(values).create()
-            manager.set_element(values["name"], element)
-            manager.set_product(values["name"], product)
-            # --------------------
+            manager.set_element(key, element)
+            if product is not None:
+                manager.set_product(values["key"], product)
     
-
-
-        clock.attach(queue0)
-        queue0.attach(queue1)
-        queue1.attach(queue2)
-        queue2.attach(queue3)
-        queue3.attach(terminate)
+        for key, values in self._config.FlowDefine.Flow.items():
+            if values["next"] != "None":
+                manager.get_element(key).attach(
+                    manager.get_element(values["next"]))
 
         return manager

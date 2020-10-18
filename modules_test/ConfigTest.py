@@ -11,6 +11,9 @@ config.read()
 
 print("config.System.Version=" + config.System.Version)
 print("config.System.Path=" + config.System.Path)
+print("config.System.Logging=" + config.System.Logging)
+print("config.System.FlowDefine=" + config.System.FlowDefine)
+
 print("config.WatchDog.Interval={0}".format(config.WatchDog.Interval))
 print("config.WatchDog.OverShoot={0}".format(config.WatchDog.OverShoot))
 

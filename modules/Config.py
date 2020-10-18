@@ -11,6 +11,7 @@ class SystemConfig(object):
     def read(self):
         self._Version = self.parser.get("System", "Version")
         self._Path = self.parser.get("System", "Path")
+        self._Logging = self.parser.get("System", "Logging")
         self._FlowDefine= self.parser.get("System", "FlowDefine")
 
     @property
@@ -20,6 +21,10 @@ class SystemConfig(object):
     @property
     def Path(self):
         return self._Path
+
+    @property
+    def Logging(self):
+        return self._Logging
 
     @property
     def FlowDefine(self):

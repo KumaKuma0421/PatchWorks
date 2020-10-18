@@ -3,12 +3,15 @@
 #
 
 import logging.config
-
+from modules.Config import Config
 
 class Logger(logging.LoggerAdapter):
 
     def __init__(self, handler=''):
-        logging.config.fileConfig(r'.\config\logging.ini')
+        config = Config.getConfig()
+        config.read()
+        logging_file = config.System.Logging
+        logging.config.fileConfig(logging_file)
         self.logger = logging.getLogger(handler)
 
     @classmethod
