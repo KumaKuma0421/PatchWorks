@@ -7,28 +7,28 @@
     "next": "Element2"
   },
   "Element2": {
-    "id": 2,
-    "name": "Step1",
+    "id": "Step1",
+    "name": "Dummy1",
     "object": "QueueElement",
     "product": "DummyProduct",
     "next": "Element3"
   },
   "Element3": {
-    "id": 3,
-    "name": "Step2",
+    "id": "Step2",
+    "name": "Dummy2",
     "object": "QueueElement",
     "product": "DummyProduct",
     "next": "Element4"
   },
   "Element4": {
-    "id": 4,
-    "name": "Step3",
+    "id": "Step3",
+    "name": "Dummy3",
     "object": "QueueElement",
     "product": "DummyProduct",
     "next": "Element5"
   },
   "Element5": {
-    "id": 5,
+    "id": "Terminate",
     "name": "Terminate",
     "object": "TerminateElement",
     "product": "None",
