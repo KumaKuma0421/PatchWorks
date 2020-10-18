@@ -1,5 +1,8 @@
+import os
 import configparser
 import json
+
+CONFIG_FILE_NAME = r"./config/config.ini"
 
 class SystemConfig(object):
     def __init__(self, parser):
@@ -58,6 +61,9 @@ class Config(object):
     _instance = None
 
     def __init__(self, config_file):
+        if not os.path.exists(config_file):
+            raise FileNotFoundError(config_file)
+
         self.config_file = config_file
         self.parser = configparser.ConfigParser()
 
@@ -68,7 +74,7 @@ class Config(object):
     @classmethod
     def getConfig(cls):
         if cls._instance is None:
-            _instance = cls(r".\config\config.ini")
+            _instance = cls(CONFIG_FILE_NAME)
         return _instance
 
     def read(self):
