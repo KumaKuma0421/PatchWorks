@@ -32,7 +32,7 @@ class Creator(object):
         element = self.create_element()
         product = self.create_product()
         if product is not None:
-            element.product(product)
+            element.product = product
 
         return element, product
 
@@ -57,11 +57,18 @@ class FactoryMethod(object):
             element, product = Creator(values).create()
             manager.set_element(key, element)
             if product is not None:
-                manager.set_product(values["key"], product)
+                manager.set_product(key, product)
     
         for key, values in self._config.FlowDefine.Flow.items():
             if values["next"] != "None":
-                manager.get_element(key).attach(
-                    manager.get_element(values["next"]))
+                if type(values["next"]) is str:
+                    manager.get_element(key).attach(
+                        manager.get_element(values["next"]))
+                elif type(values["next"]) is list:
+                    for distribute in values["next"]:
+                        manager.get_element(key).attach(
+                            manager.get_element(distribute))
+                else:
+                    raise ValueError(values["next"])
 
         return manager

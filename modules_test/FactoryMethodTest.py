@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     manager.init(config, logger)
     
-    for i in range(5):
+    for i in range(3):
         manager.start()
         time.sleep(5)
         manager.stop()
