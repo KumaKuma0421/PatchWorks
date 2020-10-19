@@ -2,6 +2,7 @@ from templates.Interfaces import IProductManager
 
 class ProductManager(IProductManager):
     def __init__(self):
+        super().__init__()
         self._elements = dict()
         self._products = dict()
 
@@ -11,7 +12,7 @@ class ProductManager(IProductManager):
 
         for name, value in self._elements.items():
             print("init:" + name)
-            if name == "clock":
+            if value.id == "Clock":
                 value.init(self.config.WatchDog.Interval)
             else:
                 value.init()
