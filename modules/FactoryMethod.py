@@ -46,7 +46,7 @@ class FactoryMethod(object):
 
         for key, values in self._config.FlowDefine.Flow.items():
             self._logger.info(
-                "flow[{0}] id={1} name={2} object={3} product={4} nect={5}"
+                "flow[{0}] id={1} name={2} object={3} product={4} next={5}"
                 .format(
                     key,
                     values["id"], values["name"], values["object"],
