@@ -25,6 +25,7 @@ class ClockElement(IElement):
         self.timer.stop()
 
     def update(self, value):
+        print("-" * 50)
         now = time.perf_counter()
         data = Data(self.counter)
         data.add_processing_time(now)

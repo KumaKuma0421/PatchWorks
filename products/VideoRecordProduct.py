@@ -1,0 +1,2 @@
+class VideoRecordProduct(object):
+    pass

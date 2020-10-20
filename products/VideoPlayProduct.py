@@ -1,0 +1,2 @@
+class VideoPlayProduct(object):
+    pass

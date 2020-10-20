@@ -4,8 +4,12 @@ from modules.ClockElement import ClockElement
 from modules.QueueElement import QueueElement
 from modules.QueueElement import TerminateElement
 from modules.SyncElement import SyncElement
-from modules.ProductManager import ProductManager
-from modules.DummyProduct import DummyProduct
+from products.DummyProduct import DummyProduct
+from products.VideoCaptureProduct import VideoCaptureProduct
+from products.VideoPlayProduct import VideoPlayProduct
+from products.VideoRecordProduct import VideoRecordProduct
+from products.VideoViewProduct import VideoViewProduct
+from products.ProductManager import ProductManager
 
 
 class Creator(object):
@@ -25,6 +29,14 @@ class Creator(object):
     def create_product(self):
         if self._values["product"] == "DummyProduct":
             return DummyProduct(self._values["id"])
+        elif self._values["product"] == "VideoCaptureProduct":
+            return VideoCaptureProduct(self._values["id"])
+        elif self._values["product"] == "VideoPlayProduct":
+            return VideoPlayProduct(self._values["id"])
+        elif self._values["product"] == "VideoRecordProduct":
+            return VideoRecordProduct(self._values["id"])
+        elif self._values["product"] == "VideoViewProduct":
+            return VideoViewProduct(self._values["id"])
         else:
             return None
     
