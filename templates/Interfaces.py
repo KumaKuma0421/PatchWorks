@@ -45,6 +45,8 @@ class IProduct(IdentityObject):
     def __init__(self, id):
         super().__init__()
         self.id = id
+        self.config = None
+        self.logger = None
 
     def init(self, config, logger):
         self.config = config
@@ -68,7 +70,8 @@ class IProduct(IdentityObject):
 
 class IProductManager(object):
     def __init__(self):
-        pass
+        self.config = None
+        self.logger = None
 
     def init(self, config, logger):
         self.config = config
@@ -84,15 +87,4 @@ class IProductManager(object):
         pass
 
     def exit(self):
-        pass
-
-
-class ICreator(object):
-    def __init__(self):
-        pass
-
-    def create_product(*args, **kwargs):
-        pass
-
-    def create_element(*args, **kwargs):
         pass

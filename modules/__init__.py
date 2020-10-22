@@ -2,10 +2,8 @@ from modules.Buffer import *
 from modules.ClockElement import *
 from modules.Config import *
 from modules.Data import *
-from modules.DummyProduct import *
 from modules.FactoryMethod import *
 from modules.Logger import *
-from modules.ProductManager import *
 from modules.QueueElement import *
 from modules.SyncElement import *
 from modules.WatchDogTimer import *

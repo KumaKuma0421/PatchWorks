@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(
 from modules.Data import Data
 from modules.Config import Config
 from modules.Logger import Logger
-from modules.ProductManager import ProductManager
+from products.ProductManager import ProductManager
 
 if __name__ == "__main__":
     config = Config.getConfig()

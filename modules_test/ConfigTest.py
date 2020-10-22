@@ -9,7 +9,15 @@ from modules.Config import Config
 config = Config.getConfig()
 config.read()
 
-print("config.System.os=" + config.System.os)
-print("config.System.version=" + config.System.version)
-print("config.System.path=" + config.System.path)
-print("config.ClockGenerator.interval={0}".format(config.ClockGenerator.interval))
+print("config.System.Version=" + config.System.Version)
+print("config.System.Path=" + config.System.Path)
+print("config.System.Logging=" + config.System.Logging)
+print("config.System.FlowDefine=" + config.System.FlowDefine)
+
+print("config.WatchDog.Interval={0}".format(config.WatchDog.Interval))
+print("config.WatchDog.OverShoot={0}".format(config.WatchDog.OverShoot))
+
+flow_def = config.FlowDefine.Flow
+print(flow_def)
+print(flow_def["Element3"])
+print(flow_def["Element3"]["object"])
