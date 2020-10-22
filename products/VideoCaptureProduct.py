@@ -9,6 +9,8 @@ class VideoCaptureProduct(IProduct):
         self.isReady = False
 
     def start(self):
+        self.logger.info("VideoCaptureProduct.start() IN")
+
         self.capture = cv2.VideoCapture(0)
 
         if self.capture.set(cv2.CAP_PROP_FPS, 30) != True:
@@ -25,18 +27,16 @@ class VideoCaptureProduct(IProduct):
         
         self.isReady = True
 
+        self.logger.info("VideoCaptureProduct.start() OUT")
+
     def process(self, value):
-        self.logger.info("VideoCaptureProduct[{0}].process()".format(self.id))
-        
         now = time.perf_counter()
         value.add_processing_time(now)
 
         if self.isReady:
-            print("*" * 30)
             _, image = self.capture.read()
             value.set_body(image)
         else:
-            print("-" * 30)
             value.set_body(None)
         
         return value
