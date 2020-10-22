@@ -15,6 +15,10 @@ if __name__ == "__main__":
     config.read()
     logger = Logger.getLogger()
     
+    logger.info("-" * 60)
+    logger.info("FactoryMethodTest Start")
+    logger.info("-" * 60)
+
     factory = FactoryMethod(config, logger)
     manager = factory.create()
 
@@ -22,7 +26,7 @@ if __name__ == "__main__":
     
     for i in range(3):
         manager.start()
-        time.sleep(5)
+        time.sleep(30)
         manager.stop()
         time.sleep(5)
     
