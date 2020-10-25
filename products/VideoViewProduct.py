@@ -134,25 +134,25 @@ class VideoViewProduct(IProduct):
         image = cv2.flip(image, 1)
 
         # ウィンドウに文字を表示
-        text2 = "width:{0:4}".format(640) # TODO:暫定
+        text2 = "width:{0:4d}".format(640) # TODO:暫定
         cv2.putText(image, text2, (4, start_row), font, 0.7,
                     (255, 255, 255), 0, cv2.LINE_AA)
         start_row += offset_row
 
         # ウィンドウに文字を表示
-        text3 = "height:{0:4}".format(480) # TODO:暫定
+        text3 = "height:{0:4d}".format(480) # TODO:暫定
         cv2.putText(image, text3, (4, start_row), font, 0.7,
                     (255, 255, 255), 0, cv2.LINE_AA)
         start_row += offset_row
 
         # ウィンドウに文字を表示
-        text1 = "fps:{0:2.3}".format(30.0) # TODO:暫定
+        text1 = "fps:{0:5.3f}".format(30.0) # TODO:暫定
         cv2.putText(image, text1, (4, start_row), font, 0.7,
                     (255, 255, 255), 0, cv2.LINE_AA)
         start_row += offset_row
 
         # ウィンドウに文字を表示
-        text4 = "count:{0:4}".format(self.counter)
+        text4 = "count:{0:4d}".format(self.counter)
         cv2.putText(image, text4, (4, start_row), font, 0.7,
                     (255, 255, 255), 0, cv2.LINE_AA)
 
