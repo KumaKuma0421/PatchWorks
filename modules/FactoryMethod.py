@@ -4,6 +4,7 @@ from modules.ClockElement import ClockElement
 from modules.QueueElement import QueueElement
 from modules.QueueElement import TerminateElement
 from modules.SyncElement import SyncElement
+from modules.CaptureElement import CaptureElement
 from products.DummyProduct import DummyProduct
 from products.VideoCaptureProduct import VideoCaptureProduct
 from products.VideoPlayProduct import VideoPlayProduct
@@ -23,6 +24,8 @@ class Creator(object):
             return QueueElement(self._values["id"])
         elif self._values["object"] == "TerminateElement":
             return TerminateElement(self._values["id"])
+        elif self._values["object"] == "CaptureElement":
+            return CaptureElement(self._values["id"])
         else:
             return None
 
