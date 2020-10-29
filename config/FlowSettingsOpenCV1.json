@@ -1,0 +1,33 @@
+{
+  "Element1": {
+    "id": "Clock",
+    "name": "Clock Generator",
+    "object": "ClockElement",
+    "product": "None",
+    "next": "Element2"
+  },
+  "Element2": {
+    "id": "Step2",
+    "name": "VideoPlay",
+    "object": "QueueElement",
+    "product": "VideoPlayProduct",
+    "next": "Element3"
+  },
+  "Element3": {
+    "id": "Step3",
+    "name": "VideoView",
+    "object": "QueueElement",
+    "product": "VideoViewProduct",
+    "next": "Terminate1",
+    "title": "VideoView #1",
+    "left": 72,
+    "top": 64
+  },
+  "Terminate1": {
+    "id": "Terminate1",
+    "name": "Terminate1",
+    "object": "TerminateElement",
+    "product": "None",
+    "next": "None"
+  }
+}

@@ -17,6 +17,8 @@ print("config.System.FlowDefine=" + config.System.FlowDefine)
 print("config.WatchDog.Interval={0}".format(config.WatchDog.Interval))
 print("config.WatchDog.OverShoot={0}".format(config.WatchDog.OverShoot))
 
+print("config.VideoPlay.VideoFile={0}".format(config.VideoPlay.VideoFile))
+
 flow_def = config.FlowDefine.Flow
 print(flow_def)
 print(flow_def["Element3"])

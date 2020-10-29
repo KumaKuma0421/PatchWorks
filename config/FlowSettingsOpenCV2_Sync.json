@@ -1,0 +1,26 @@
+{
+  "Element1": {
+    "id": "Capture",
+    "name": "VideoCapture",
+    "object": "CaptureElement",
+    "product": "None",
+    "next": "Element2"
+  },
+  "Element2": {
+    "id": "Step2",
+    "name": "VideoView",
+    "object": "SyncElement",
+    "product": "VideoViewProduct",
+    "next": "Terminate1",
+    "title": "VideoView #1",
+    "left": 72,
+    "top": 64
+  },
+  "Terminate1": {
+    "id": "Terminate1",
+    "name": "Terminate1",
+    "object": "TerminateElement",
+    "product": "None",
+    "next": "None"
+  }
+}

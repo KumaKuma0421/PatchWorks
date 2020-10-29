@@ -120,6 +120,7 @@ class VideoViewProduct(IProduct):
             self.counter += 1
             request = Request()
             request.Command = request.command_data
+            image = cv2.resize(image, dsize=(640, 480))
             request.Body = self.add_info(image)
             self.viewThread.request(request)
 

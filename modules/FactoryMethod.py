@@ -22,6 +22,8 @@ class Creator(object):
             return ClockElement(self._values["id"])
         elif self._values["object"] == "QueueElement":
             return QueueElement(self._values["id"])
+        elif self._values["object"] == "SyncElement":
+            return QueueElement(self._values["id"])
         elif self._values["object"] == "TerminateElement":
             return TerminateElement(self._values["id"])
         elif self._values["object"] == "CaptureElement":
