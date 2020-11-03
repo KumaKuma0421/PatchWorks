@@ -3,18 +3,21 @@
 #
 
 import cv2
+import time
+import math
 
 # カメラのキャプチャを開始 --- (*1)
 cam = cv2.VideoCapture(0)
 
 # カメラのfps、サイズを変更
-print(cam.set(cv2.CAP_PROP_FPS, 30))
+print(cam.set(cv2.CAP_PROP_FPS, 60))
 print(cam.set(cv2.CAP_PROP_FRAME_WIDTH, 640))
 print(cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 480))
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 counter = 0
 line_counter = 0
+previous_time = 0
 
 WINDOW_TITLE_1 = "PUSH ENTER KEY"
 WINDOW_TITLE_2 = "ANOTHER VIEW"
@@ -24,21 +27,28 @@ cv2.moveWindow(WINDOW_TITLE_1, 72, 64)
 cv2.moveWindow(WINDOW_TITLE_2, 800, 64)
 
 while True:
+    # 現在時刻を取得
+    current_time = time.perf_counter()
+
     # 画像を取得 --- (*2)
     _, img = cam.read()
 
     # ウィンドウに文字を表示
-    text1 = "fps:{0:2.3}".format(cam.get(cv2.CAP_PROP_FPS))
+    text1 = "fps:{0:2.3f}".format(cam.get(cv2.CAP_PROP_FPS))
     cv2.putText(img, text1, (4, 20), font, 0.7,
                 (255, 255, 255), 0, cv2.LINE_AA)
 
     # ウィンドウに文字を表示
-    text2 = "width:{0:4}".format(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
+    text2 = "width:{0:4} height:{1:4}".format(
+        cam.get(cv2.CAP_PROP_FRAME_WIDTH),
+        cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
     cv2.putText(img, text2, (4, 42), font, 0.7,
                 (255, 255, 255), 0, cv2.LINE_AA)
 
     # ウィンドウに文字を表示
-    text3 = "height:{0:4}".format(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    interval = math.floor((current_time - previous_time) * 1000)
+    previous_time = current_time
+    text3 = "interval:{0:3}".format(interval)
     cv2.putText(img, text3, (4, 64), font, 0.7,
                 (255, 255, 255), 0, cv2.LINE_AA)
 
@@ -64,7 +74,7 @@ while True:
     cv2.imshow(WINDOW_TITLE_2, cv2.flip(img, 1))
 
     # Enterキーが押されたら終了する
-    if cv2.waitKey(30) == 13:
+    if cv2.waitKey(1) == 13:
         break
 # 後始末
 cam.release()

@@ -4,8 +4,6 @@ import cv2
 from templates.Interfaces import IdentityObject, IProduct
 from modules.Buffer import Buffer
 
-WINDOW_TITLE = "Video View"
-
 
 class Request(object):
     command_start = 0
@@ -34,11 +32,15 @@ class Request(object):
 
 
 class VideoDisplaySubThread(IdentityObject):
-    def __init__(self, id, logger):
+    def __init__(self, id, logger, params):
         self.id = id
         self._loop = False
         self.buffer = Buffer(id)
         self.logger = logger
+        self.params = params
+        self.title = params["title"]
+        self.left = params["left"]
+        self.top = params["top"]
 
     def start(self):
         self.logger.info("VideoDisplaySubThread.start() IN")
@@ -64,14 +66,14 @@ class VideoDisplaySubThread(IdentityObject):
             request = self.buffer.pop()
             if request.Command == request.command_start:
                 cv2.namedWindow(
-                    WINDOW_TITLE, cv2.WINDOW_AUTOSIZE | cv2.WINDOW_GUI_NORMAL)
-                cv2.moveWindow(WINDOW_TITLE, 72, 64)
+                    self.title, cv2.WINDOW_AUTOSIZE | cv2.WINDOW_GUI_NORMAL)
+                cv2.moveWindow(self.title, self.left, self.top)
 
             elif request.Command == request.command_stop:
-                cv2.destroyWindow(WINDOW_TITLE)
+                cv2.destroyWindow(self.title)
 
             elif request.Command == request.command_data:
-                cv2.imshow(WINDOW_TITLE, request.Body)
+                cv2.imshow(self.title, request.Body)
                 cv2.waitKey(1)
 
             else:
@@ -84,11 +86,14 @@ class VideoViewProduct(IProduct):
     def __init__(self, id):
         super().__init__(id)
         self.viewThread = None
+        self.counter = 0
 
     def start(self):
         self.logger.info("VideoViewProduct.start() IN")
 
-        self.viewThread = VideoDisplaySubThread(self.id, self.logger)
+        self.counter = 0
+        self.viewThread = VideoDisplaySubThread(
+            self.id, self.logger, self.params)
         self.viewThread.start()
         request = Request()
         request.Command = request.command_start
@@ -112,9 +117,44 @@ class VideoViewProduct(IProduct):
 
         image = value.get_body()
         if image is not None:
+            self.counter += 1
             request = Request()
             request.Command = request.command_data
-            request.Body = image
+            image = cv2.resize(image, dsize=(640, 480))
+            request.Body = self.add_info(image)
             self.viewThread.request(request)
 
         return value
+
+    def add_info(self, image):
+        start_row = 20
+        offset_row = 22
+        font = cv2.FONT_HERSHEY_SIMPLEX
+
+        # 水平反転映像
+        image = cv2.flip(image, 1)
+
+        # ウィンドウに文字を表示
+        text2 = "width:{0:4d}".format(640) # TODO:暫定
+        cv2.putText(image, text2, (4, start_row), font, 0.7,
+                    (255, 255, 255), 0, cv2.LINE_AA)
+        start_row += offset_row
+
+        # ウィンドウに文字を表示
+        text3 = "height:{0:4d}".format(480) # TODO:暫定
+        cv2.putText(image, text3, (4, start_row), font, 0.7,
+                    (255, 255, 255), 0, cv2.LINE_AA)
+        start_row += offset_row
+
+        # ウィンドウに文字を表示
+        text1 = "fps:{0:5.3f}".format(30.0) # TODO:暫定
+        cv2.putText(image, text1, (4, start_row), font, 0.7,
+                    (255, 255, 255), 0, cv2.LINE_AA)
+        start_row += offset_row
+
+        # ウィンドウに文字を表示
+        text4 = "count:{0:4d}".format(self.counter)
+        cv2.putText(image, text4, (4, start_row), font, 0.7,
+                    (255, 255, 255), 0, cv2.LINE_AA)
+
+        return image

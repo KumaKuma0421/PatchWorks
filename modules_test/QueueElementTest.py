@@ -35,7 +35,7 @@ if __name__ == "__main__":
             data = Data(i)
             data.add_processing_time(now)
             data.set_command("frame")
-            data.set_body("test {0} {1:3.3f}".format(i, now - time_before))
+            data.set_body("test {0} {1:5.3f}".format(i, now - time_before))
             queue.update(data)
             time.sleep(1)
         queue.stop()

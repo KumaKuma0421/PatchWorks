@@ -47,6 +47,17 @@ class WatchDogConfig(object):
     def OverShoot(self):
         return int(self._OverShoot)
 
+class VideoPlayConfig(object):
+    def __init__(self, parser):
+        self.parser = parser
+    
+    def read(self):
+        self._VideoFile = self.parser.get("VideoPlay", "VideoFile")
+    
+    @property
+    def VideoFile(self):
+        return self._VideoFile
+    
 class FlowDefineConfig(object):
     def __init__(self, parser):
         self.parser = parser
@@ -74,6 +85,7 @@ class Config(object):
 
         self._System = SystemConfig(self.parser)
         self._WatchDog = WatchDogConfig(self.parser)
+        self._VideoPlay = VideoPlayConfig(self.parser)
         self._FlowDefine = FlowDefineConfig(self.parser)
 
     @classmethod
@@ -87,6 +99,7 @@ class Config(object):
 
         self._System.read()
         self._WatchDog.read()
+        self._VideoPlay.read()
         self._FlowDefine.read()
 
     @property
@@ -97,6 +110,10 @@ class Config(object):
     def WatchDog(self):
         return self._WatchDog
 
+    @property
+    def VideoPlay(self):
+        return self._VideoPlay
+        
     @property
     def FlowDefine(self):
         return self._FlowDefine

@@ -1,25 +1,15 @@
 {
   "Element1": {
-    "id": "Clock",
-    "name": "Clock Generator",
-    "object": "ClockElement",
+    "id": "Capture",
+    "name": "VideoCapture",
+    "object": "CaptureElement",
     "product": "None",
     "next": "Element2"
   },
   "Element2": {
     "id": "Step2",
-    "name": "VideoCapture",
-    "object": "QueueElement",
-    "product": "VideoCaptureProduct",
-    "next": "Element3",
-    "width": 640,
-    "height": 480,
-    "fps": 30
-  },
-  "Element3": {
-    "id": "Step3",
     "name": "VideoView",
-    "object": "QueueElement",
+    "object": "SyncElement",
     "product": "VideoViewProduct",
     "next": "Terminate1",
     "title": "VideoView #1",

@@ -30,6 +30,6 @@ class ClockElement(IElement):
         data.add_processing_time(now)
         data.set_command("frame")
         data.set_body(list())
-        data.get_body().append("test {0} {1:3.3f}".format(self.counter, now - self.time_before))
+        data.get_body().append("test {0} {1:5.3f}".format(self.counter, now - self.time_before))
         super().notify(data)
         self.counter += 1

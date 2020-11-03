@@ -5,7 +5,7 @@
 import cv2
 import numpy as np
 
-filepath = r"C:\Users\User01\Sources\GitHub\PatchWorks\Sample"
+filepath = r"C:\Users\User01\Sources\GitHub\PatchWorks\Sample\OpenCV"
 filename = r"mov_hts-samp005.mp4"
 
 # 動画の読み込み

@@ -5,7 +5,6 @@ import time
 # https://qiita.com/reinhardhq/items/838df0bf09611f3c5872
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..')))
-from modules.Data import Data
 from modules.Config import Config
 from modules.Logger import Logger
 from modules.FactoryMethod import FactoryMethod

@@ -4,13 +4,14 @@ from modules.ClockElement import ClockElement
 from modules.QueueElement import QueueElement
 from modules.QueueElement import TerminateElement
 from modules.SyncElement import SyncElement
+from modules.CaptureElement import CaptureElement
 from products.DummyProduct import DummyProduct
 from products.VideoCaptureProduct import VideoCaptureProduct
 from products.VideoPlayProduct import VideoPlayProduct
 from products.VideoRecordProduct import VideoRecordProduct
 from products.VideoViewProduct import VideoViewProduct
 from products.ProductManager import ProductManager
-
+from templates.Interfaces import IProduct, IElement
 
 class Creator(object):
     def __init__(self, values):
@@ -21,24 +22,35 @@ class Creator(object):
             return ClockElement(self._values["id"])
         elif self._values["object"] == "QueueElement":
             return QueueElement(self._values["id"])
+        elif self._values["object"] == "SyncElement":
+            return QueueElement(self._values["id"])
         elif self._values["object"] == "TerminateElement":
             return TerminateElement(self._values["id"])
+        elif self._values["object"] == "CaptureElement":
+            return CaptureElement(self._values["id"])
         else:
             return None
 
     def create_product(self):
+        product:IProduct = None
+
         if self._values["product"] == "DummyProduct":
-            return DummyProduct(self._values["id"])
+            product = DummyProduct(self._values["id"])
         elif self._values["product"] == "VideoCaptureProduct":
-            return VideoCaptureProduct(self._values["id"])
+            product = VideoCaptureProduct(self._values["id"])
         elif self._values["product"] == "VideoPlayProduct":
-            return VideoPlayProduct(self._values["id"])
+            product = VideoPlayProduct(self._values["id"])
         elif self._values["product"] == "VideoRecordProduct":
-            return VideoRecordProduct(self._values["id"])
+            product = VideoRecordProduct(self._values["id"])
         elif self._values["product"] == "VideoViewProduct":
-            return VideoViewProduct(self._values["id"])
+            product = VideoViewProduct(self._values["id"])
         else:
-            return None
+            pass
+
+        if product is not None:
+            product.params = self._values
+        
+        return product
     
     def create(self):
         element = self.create_element()

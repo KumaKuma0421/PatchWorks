@@ -47,6 +47,7 @@ class IProduct(IdentityObject):
         self.id = id
         self.config = None
         self.logger = None
+        self._params = None
 
     def init(self, config, logger):
         self.config = config
@@ -66,7 +67,14 @@ class IProduct(IdentityObject):
 
     def exit(self):
         pass
-
+    
+    @property
+    def params(self):
+        return self._params
+    
+    @params.setter
+    def params(self, value):
+        self._params = value
 
 class IProductManager(object):
     def __init__(self):

@@ -17,6 +17,8 @@ class ProductManager(IProductManager):
             self.logger.info("initialize {0}-{1}".format(name, value.id))
             if value.id == "Clock":
                 value.init(self.config.WatchDog.Interval)
+            elif value.id == "Capture":
+                value.init(self.config.WatchDog.Interval)
             else:
                 value.init()
 
